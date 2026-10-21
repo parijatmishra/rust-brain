@@ -1,0 +1,7 @@
+target/
+.serena/
+/docs/html
+*.tmp
+*.log
+PROMPT*.md
+
