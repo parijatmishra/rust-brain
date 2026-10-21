@@ -1,6 +1,6 @@
 target/
 .serena/
-/docs/html
+/html
 *.tmp
 *.log
 PROMPT*.md

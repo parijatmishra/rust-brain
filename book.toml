@@ -1,0 +1,23 @@
+[book]
+title = "Rust Brain"
+authors = ["Parijat Mishra"]
+language = "en"
+src = "src"
+
+[build]
+build-dir = "html"
+create-missing = false
+extra-watch-dirs = ["code"]
+
+[rust]
+edition = "2024"
+
+[preprocessor.index]
+
+[preprocessor.lint]
+before = ["links"]
+fail-on-errors = true
+
+[preprocessor.links]
+
+[preprocessor.mermaid]
