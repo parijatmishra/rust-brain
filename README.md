@@ -63,6 +63,17 @@ For convenience, the following two scripts are available:
 Leave one or both of these scripts running in a terminal window to get live
 feedback as you modify code/book.
 
+### Lint Shell Scripts (Optional)
+
+If you modify the `*.sh` scripts, run
+[`scripts_lint.sh`](./scripts_lint.sh) to check them with [shellcheck]. This is
+optional: no other script needs shellcheck. `scripts_lint.sh` exits with an
+error if shellcheck is missing. To get shellcheck, either:
+- install it globally: `brew install shellcheck`, or
+- run it without installing: `uvx --from shellcheck-py shellcheck -x ./*.sh code/*.sh`.
+
+[shellcheck]: https://www.shellcheck.net/
+
 ### Live-Reload
 
 Run `mdbook serve` in the root directory: this will build the book and serve it

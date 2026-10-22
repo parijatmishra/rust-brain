@@ -1,0 +1,12 @@
+[package]
+name = "cargo02"
+authors.workspace = true
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+
+[dependencies]
+
+[[bin]]
+name = "cargo02-hello02"
+path = "src/bin/hello02.rs"
