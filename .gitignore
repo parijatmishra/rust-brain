@@ -4,4 +4,6 @@ target/
 *.tmp
 *.log
 PROMPT*.md
+*.code-workspace
+.vscode
 
