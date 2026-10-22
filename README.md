@@ -22,8 +22,8 @@ NON-GOALS:
 - Be a programming tutorial---assume the user knows binaries, libraries,
   frameworks, build-systems, dependencies.
 - Be an exhaustive reference manual describing every argument and option to
-  every command/tool. Instead, describe the```` most common use cases, hint other
-  interesting options exist and provide links to canonical documentation.
+  every command/tool. Instead, describe the```` most common use cases, hint
+  other interesting options exist and provide links to canonical documentation.
 
 GOALS:
 - Document Rust specific terminology, syntax, conventions, best practices,
@@ -35,12 +35,14 @@ GOALS:
 Pre-requisites:
 - [Install Rust and Cargo](https://rust-lang.org/tools/install/).
 - Install the other tools by running [`tools_install.sh`](./tools_install.sh).
-- Check if all tools are present and working by running [`tools_verify.sh`](./tools_verify.sh).
+- Check if all tools are present and working by running
+  [`tools_verify.sh`](./tools_verify.sh).
 
 [mdbook]: https://rust-lang.github.io/mdBook/
 
-Then, run [`book_build.sh`](./book_build.sh). The book will be in
-[`html/index.html`](./html/index.html).
+Then, run [`book_build.sh`](./book_build.sh). This command generate output in
+the `html/` directory; the root of the book will be at `html/index.html`. (This
+directory is excluded from git.)
 
 ## Develop
 
@@ -53,16 +55,22 @@ runs. If you add a new directory to `code/`, update `verify_code.sh` to ensure
 it is compiled and tested.
 
 For convenience, the following two scripts are available:
-- [`code_verify_watch.sh`](./code_verify_watch.sh): monitors the `code/` directory for changes, and runs `code_verify.sh`.
-- [`book_build_watch.sh`](./book_build_watch.sh): monitors the `src/` _and_ `code/` directories for changes, and runs `book_build.sh`.
+- [`code_verify_watch.sh`](./code_verify_watch.sh): monitors the `code/`
+  directory for changes, and runs `code_verify.sh`.
+- [`book_build_watch.sh`](./book_build_watch.sh): monitors the `src/` _and_
+  `code/` directories for changes, and runs `book_build.sh`.
 
-Leave one or both of these scripts running in a terminal window to get live feedback as you modify code/book.
+Leave one or both of these scripts running in a terminal window to get live
+feedback as you modify code/book.
 
 ### Live-Reload
 
-Run `mdbook serve` in the root directory: this will build the book and serve it on on HTTP and print a URL (like [http://localhost:3000/]). You can open this URL in a browser and the browser page will hot-reload as you make changes to `src/*.md`.
+Run `mdbook serve` in the root directory: this will build the book and serve it
+on on HTTP and print a URL (like [http://localhost:3000/]). You can open this
+URL in a browser and the browser page will hot-reload as you make changes to
+`src/*.md`.
 
-**Caveat**: this command will not run tests on Rust code, and won't check if
-book code refers to non-existent files/code. You should still run
-`code_verify.sh` after changing anything under `code/`, and `book_build.sh`
-after changing anything under `src/`.
+> **WARNING**. This command will render `*.md` files, but _not_ check included
+> Rust code, or check the `*.md` files for best practices or errors. If you use
+> this command, you should run `build_book.sh` periodically and before checking
+> code into git.
