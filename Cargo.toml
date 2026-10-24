@@ -1,0 +1,9 @@
+[workspace]
+resolver = "3"
+members = ["cargo01"]
+
+[workspace.package]
+authors = ["Parijat Mishra"]
+edition = "2024"
+version = "0.1.0"
+license = "MIT"
