@@ -1,8 +1,0 @@
-[package]
-name = "cargo01"
-authors.workspace = true
-edition.workspace = true
-version.workspace = true
-license.workspace = true
-
-[dependencies]
