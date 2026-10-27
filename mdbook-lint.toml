@@ -1,0 +1,7 @@
+fail-on-warnings = true
+# CONTENT001: disabled, so we can have `TODO:`, `WIP:`, `DONE:` text in our
+# markdown files; I want these tags to track status and don't mind it if the
+# published output contains them.  MD007: there is a bug in
+# `mdbook-lint-rulesets` MD007 such that it triggers on _nested_ lists if a a
+# list item has continuation lines.
+disabled-rules = ["CONTENT001", "MD007"]
