@@ -30,9 +30,10 @@ must link to an existing file. Preserve links when changing an entry's status.
 
 ## Currently out of scope
 
-Mention recognizable syntax when it appears, but do not develop these topics
-in detail. Use stable Rust and safe APIs for ordinary examples; mark any
-syntax-only discussion that falls outside those constraints.
+For the following topics, mention recognizable syntax when it appears and what
+concept is that syntax for, but do not develop these topics in detail. Use
+stable Rust and safe APIs for ordinary examples; mark any syntax-only discussion
+that falls outside those constraints.
 
 - Rust 2024 edition differences: use the edition required by an example,
   without surveying changes from earlier editions.
