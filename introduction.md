@@ -28,7 +28,7 @@ and `TODO` means planned. Use this entry format:
 A `TODO` entry may omit its link or leave the destination empty. A `WIP` entry
 must link to an existing file. Preserve links when changing an entry's status.
 
-## Currently out of scope
+## Currently Out of Scope
 
 For the following topics, mention recognizable syntax when it appears and what
 concept is that syntax for, but do not develop these topics in detail. Use
@@ -176,8 +176,8 @@ before their dedicated sections.
   - Emphasize: `as` is not a general checked conversion. Different numeric
     casts have different rules; a cast may lose information without reporting
     failure. `From` describes infallible conversions, not arbitrary casts.
-  - Defer: `From`, `Into`, `TryFrom`, and `TryInto` implementations to conversion
-    traits. Avoid pointer casts and exhaustive numeric-cast tables.
+  - Defer: `From`, `Into`, `TryFrom`, and `TryInto` implementations to
+    conversion traits. Avoid pointer casts and exhaustive numeric-cast tables.
   - Examples: widen an integer with `u32::from`; narrow an integer with `as`;
     contrast signed and unsigned casts; show float-to-integer truncation.
 
@@ -373,8 +373,8 @@ implementation.
     including types borrowing from the implementor.
   - Defer: advanced higher-ranked constraints and dyn-compatibility rules.
     Explain required lifetime bounds only as the borrowing example needs them.
-  - Examples: define a trait with an output type and constant; contrast it
-    with a generic trait; return a borrowed view through a lifetime-parameterized
+  - Examples: define a trait with an output type and constant; contrast it with
+    a generic trait; return a borrowed view through a lifetime-parameterized
     associated type.
 
 - (TODO) [Derivable Traits] --- `Debug`; `PartialEq` and `Eq`; `PartialOrd`
@@ -747,19 +747,20 @@ APIs and show where checks move from compile time to runtime.
 - (TODO) [Unique Access and Clone-on-Write] --- `Rc::get_mut`;
   `Rc::make_mut`; weak-pointer treatment; mutable handles versus mutable
   contents; uniqueness and cloning.
-  - Emphasize: `get_mut` requires no other strong or weak handles.
-    `make_mut` clones when other strong owners exist; with only weak handles,
-    it can detach them without cloning the value. Neither is interior mutability.
+  - Emphasize: `get_mut` requires no other strong or weak handles.  `make_mut`
+    clones when other strong owners exist; with only weak handles, it can detach
+    them without cloning the value. Neither is interior mutability.
   - Defer: `Arc` and atomics to threads; `Cow` to advanced topics. A mutable
-    reference to one `Rc` handle does not make all shared contents uniquely owned.
+    reference to one `Rc` handle does not make all shared contents uniquely
+    owned.
   - Examples: mutate a unique allocation; trigger copy-on-write with a second
     strong handle; observe failed weak upgrades after weak handles are detached.
 
 ## Threads
 
-Make ownership transfer and shared access explicit before adding synchronization.
-Use stable standard-library APIs first; distinguish memory-safety guarantees
-from scheduling, progress, and application correctness.
+Make ownership transfer and shared access explicit before adding
+synchronization.  Use stable standard-library APIs first; distinguish
+memory-safety guarantees from scheduling, progress, and application correctness.
 
 - (TODO) [Threads] --- OS threads; `spawn`; `move` closures; joining;
   scoped threads; `Send`; `Sync`; auto traits.
@@ -788,8 +789,9 @@ from scheduling, progress, and application correctness.
   - Emphasize: an atomic operation protects its own value; it does not make
     a multi-step invariant atomic. Relaxed ordering does not publish unrelated
     data, and stronger ordering does not repair an incorrect algorithm.
-  - Defer: lock-free data structures, memory reclamation, and a full memory-model
-    treatment. Prefer locks for compound state unless an atomic design is clear.
+  - Defer: lock-free data structures, memory reclamation, and a full
+    memory-model treatment. Prefer locks for compound state unless an atomic
+    design is clear.
   - Examples: count independent events with relaxed `fetch_add`; signal
     shutdown with an atomic flag; illustrate release/acquire publication using
     only atomic payload fields and safe APIs.
@@ -1024,8 +1026,8 @@ Cargo dependencies, features, or tool installation each example needs.
   status and output; child handles; standard streams; waiting;
   graceful shutdown and forced termination.
   - Emphasize: command arguments do not pass through a shell unless one is
-    explicitly launched. Dropping a child handle does not kill or wait for
-    the process; undrained pipes can block progress. Shutdown is platform-specific.
+    explicitly launched. Dropping a child handle does not kill or wait for the
+    process; undrained pipes can block progress. Shutdown is platform-specific.
   - Defer: process supervision, platform-specific signal handling, and async
     subprocess APIs. Distinguish requesting graceful exit from forcing a kill.
   - Examples: run a command with separate arguments; inspect exit status;
@@ -1056,7 +1058,8 @@ Cargo dependencies, features, or tool installation each example needs.
   fuzz targets; input corpora; coverage feedback; crash reproduction.
   - Emphasize: fuzz targets should accept arbitrary input without unexpected
     panics, hangs, or unsafe behavior. Toolchain requirements vary; `cargo-fuzz`
-    normally requires nightly and remains an optional exception to stable examples.
+    normally requires nightly and remains an optional exception to stable
+    examples.
   - Defer: sanitizer internals, nightly setup details, and distributed fuzzing.
     Distinguish byte-level fuzz inputs from structured property-test generation.
   - Examples: wrap a parser in a fuzz target; seed a small corpus; reproduce
@@ -1130,7 +1133,8 @@ implementations.
   streams; basic HTTP framing; request and response I/O; structured logging.
   - Emphasize: TCP supplies bytes, not message boundaries. Partial reads and
     writes are normal; bound request size and reading time. State the supported
-    HTTP subset rather than implying a small parser implements the full protocol.
+    HTTP subset rather than implying a small parser implements the full
+    protocol.
   - Defer: TLS, full HTTP compliance, persistent connections, and concurrency.
     Label any structured-logging crate as an external dependency.
   - Examples: handle one bounded request at a time; send a response with an
