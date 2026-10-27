@@ -1,22 +1,66 @@
 # Introduction
 
-This book is a Rust refresher built with `mdbook`, for programmers who have
-used Rust and need to recall it before starting another project. Keep
-explanations brief and use code examples to recover syntax and Rust-specific
-rules without rereading a programming primer.
+This book is a Rust refresher built with `mdbook`, for programmers who have used
+Rust and need to recall it before starting another project. It keeps
+explanations brief, and relies heavily on code examples to remind the user of
+syntax and Rust-specific rules without rereading a programming primer.
 
-Cover useful cases rather than every language detail. Assume knowledge of
-basic programming concepts; explain what distinguishes Rust, and link to
-reference manuals for exhaustive coverage. Order topics to minimize forward
-references, except where scaffolding is needed to run an example.
+This book assumes that the reader is familiar with basic programming language
+syntax, and has programmed in C, Java, and Python before. It does not define or
+describe the meaning of: types, values, variables and constants, conditionals
+and loops, functions, parameters and arguments, return values, closures,
+concurrency, data races, locks and deadlocks, testing, benchmarking, profiling,
+character set and encoding. It focuses on what distinguishes Rust.
 
-The topics below are intended to be read in order. Each topic lists its scope,
-the distinctions to emphasize, details to defer, and examples to develop.
-Examples should be small and focused; label deliberately rejected code and
-explain the relevant compiler error.
+This book focuses on useful and common cases, rather than every language or tool
+detail. Links to references are provided where appropriate for easy access to
+more details. The following topics are out of scope:
 
-Each topic has a status: `DONE` means developed, `WIP` means being developed,
-and `TODO` means planned. Use this entry format:
+- Rust editions before 2024.
+- Experimental and nightly Rust features.
+- Unsafe Rust and FFI. The syntax for unsafe blocks, raw pointers, and foreign
+  declarations are mentioned in the appropriate topics, without going into
+  details, so the reader can recognize such syntax when reading code, and decide
+  for themselves whether they want to learn the details.
+- Cross compilation.
+
+Here are some authoritative references. Individual topics will link to
+appropriate chapters in them when eliding details.
+
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) ---
+  affectionately called "The Book", this is a free and high-quality learning
+  resource for the Rust language for newcomers; it discusses most the topics
+  below in greater details than this refresher.
+- [The Rust Standard Library Reference](https://doc.rust-lang.org/std/) ---
+  types, constants, traits, macros, and their API contracts.
+- [The Rust Language Reference](https://doc.rust-lang.org/reference/) ---
+  language syntax and semantics.
+- [Cargo Reference](https://doc.rust-lang.org/cargo/reference/) --- packages,
+  dependencies, features, workspaces, and build commands.
+- [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
+  --- edition-specific changes and migration guidance.
+
+## Ordering of Topics
+
+The "Bootstrap" section is intended to get someone who has used but forgotten
+the details get started quickly on scaffoling a new project or understanding an
+existing codebase's organization. To show working examples, its sample code uses
+concepts introduced in later topics, of necessity.
+
+The subsequent topics are ordered by concepts, with later concepts building on
+earlier ones. They are intended to be read in order. This book is not a
+reference: the full semantics of a keyword, syntactical element, type or trait
+may be spread across several topics if that leads to better understanding.
+
+## Instructions for Contributors
+
+After creating/modifying a '*.md' file, run `./book_build.sh`. Resolve any
+`mdbook-lint` warnings or errors, and any issues with included code samples.
+Note: the linter enforces several markdown best practices, in particular that
+text lines be at most 80 chars long.
+
+Each topic has a status keyword: `DONE` means developed, `WIP` means being
+developed, and `TODO` means planned. Use this entry format:
 
 ```text
 - (STATUS) [Title](link-to-source.md) --- brief description.
@@ -27,37 +71,6 @@ and `TODO` means planned. Use this entry format:
 
 A `TODO` entry may omit its link or leave the destination empty. A `WIP` entry
 must link to an existing file. Preserve links when changing an entry's status.
-
-## Currently Out of Scope
-
-For the following topics, mention recognizable syntax when it appears and what
-concept is that syntax for, but do not develop these topics in detail. Use
-stable Rust and safe APIs for ordinary examples; mark any syntax-only discussion
-that falls outside those constraints.
-
-- Rust 2024 edition differences: use the edition required by an example,
-  without surveying changes from earlier editions.
-- Unsafe Rust and FFI: recognize unsafe blocks, raw pointers, and foreign
-  declarations without teaching unsafe implementations or interoperability.
-- Cross-compilation: distinguish host and target when needed, without
-  developing target-specific builds or deployment.
-- Nightly features and experimental APIs: identify unstable syntax or APIs
-  encountered elsewhere, without requiring them for examples.
-
-## References
-
-Use these references for details omitted from the refresher. Link to relevant
-items or chapters from individual topics rather than reproducing their full
-specifications.
-
-- [Standard library](https://doc.rust-lang.org/std/) --- types, traits, macros,
-  and their API contracts.
-- [Rust Reference](https://doc.rust-lang.org/reference/) --- language syntax
-  and semantics.
-- [Cargo Reference](https://doc.rust-lang.org/cargo/reference/) --- packages,
-  dependencies, features, workspaces, and build commands.
-- [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
-  --- edition-specific changes and migration guidance.
 
 ## Bootstrap
 
@@ -747,7 +760,7 @@ APIs and show where checks move from compile time to runtime.
 - (TODO) [Unique Access and Clone-on-Write] --- `Rc::get_mut`;
   `Rc::make_mut`; weak-pointer treatment; mutable handles versus mutable
   contents; uniqueness and cloning.
-  - Emphasize: `get_mut` requires no other strong or weak handles.  `make_mut`
+  - Emphasize: `get_mut` requires no other strong or xweak handles.  `make_mut`
     clones when other strong owners exist; with only weak handles, it can detach
     them without cloning the value. Neither is interior mutability.
   - Defer: `Arc` and atomics to threads; `Cow` to advanced topics. A mutable
