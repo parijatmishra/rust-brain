@@ -29,11 +29,11 @@ echo
 echo "########################################################################"
 echo "run examples"
 echo "########################################################################"
-cargo run --package cargo01 --example example_my_add
+cargo run --package cargo01 --example my_add
 
 echo
 echo
 echo "########################################################################"
 echo "run benches"
 echo "########################################################################"
-cargo bench workspace --benches
+cargo bench --workspace --benches
