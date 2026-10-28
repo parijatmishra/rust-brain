@@ -1,44 +1,6 @@
 # Introduction
 
-This book is a Rust refresher built with `mdbook`, for programmers who have used
-Rust and need to recall it before starting another project. It keeps
-explanations brief, and relies heavily on code examples to remind the user of
-syntax and Rust-specific rules without rereading a programming primer.
-
-This book assumes that the reader is familiar with basic programming language
-syntax, and has programmed in C, Java, and Python before. It does not define or
-describe the meaning of: types, values, variables and constants, conditionals
-and loops, functions, parameters and arguments, return values, closures,
-concurrency, data races, locks and deadlocks, testing, benchmarking, profiling,
-character set and encoding. It focuses on what distinguishes Rust.
-
-This book focuses on useful and common cases, rather than every language or tool
-detail. Links to references are provided where appropriate for easy access to
-more details. The following topics are out of scope:
-
-- Rust editions before 2024.
-- Experimental and nightly Rust features.
-- Unsafe Rust and FFI. The syntax for unsafe blocks, raw pointers, and foreign
-  declarations are mentioned in the appropriate topics, without going into
-  details, so the reader can recognize such syntax when reading code, and decide
-  for themselves whether they want to learn the details.
-- Cross compilation.
-
-Here are some authoritative references. Individual topics will link to
-appropriate chapters in them when eliding details.
-
-- [The Rust Programming Language](https://doc.rust-lang.org/book/) ---
-  affectionately called "The Book", this is a free and high-quality learning
-  resource for the Rust language for newcomers; it discusses most the topics
-  below in greater details than this refresher.
-- [The Rust Standard Library Reference](https://doc.rust-lang.org/std/) ---
-  types, constants, traits, macros, and their API contracts.
-- [The Rust Language Reference](https://doc.rust-lang.org/reference/) ---
-  language syntax and semantics.
-- [Cargo Reference](https://doc.rust-lang.org/cargo/reference/) --- packages,
-  dependencies, features, workspaces, and build commands.
-- [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
-  --- edition-specific changes and migration guidance.
+{{#include README.md:purpose-scope}}
 
 ## Ordering of Topics
 
@@ -51,13 +13,6 @@ The subsequent topics are ordered by concepts, with later concepts building on
 earlier ones. They are intended to be read in order. This book is not a
 reference: the full semantics of a keyword, syntactical element, type or trait
 may be spread across several topics if that leads to better understanding.
-
-## Instructions for Contributors
-
-After creating/modifying a '*.md' file, run `./book_build.sh`. Resolve any
-`mdbook-lint` warnings or errors, and any issues with included code samples.
-Note: the linter enforces several markdown best practices, in particular that
-text lines be at most 80 chars long.
 
 Each topic has a status keyword: `DONE` means developed, `WIP` means being
 developed, and `TODO` means planned. Use this entry format:
