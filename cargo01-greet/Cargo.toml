@@ -1,8 +1,4 @@
 [package]
 name = "cargo01-greet"
-authors.workspace = true
-edition.workspace = true
-version.workspace = true
-license.workspace = true
-
-[dependencies]
+version = "0.1.0"
+edition = "2024"

@@ -33,7 +33,8 @@ Use minimally complete examples, even where they require forward references.
 Explain scaffolding only enough to build, run, inspect, and test the code;
 resolve its underlying concepts in later topics.
 
-- (TODO) [Cargo] --- crates; Cargo packages: all target kinds (library, binary,
+- (WIP) [Cargo](./cargo.md) --- crates; Cargo packages: all target kinds
+  (library, binary,
   integration test, example binary, benchmark binary); common cargo package
   level commands (build, test, run, bench); Cargo dependencies, and dependency
   related commands; Cargo workspaces.

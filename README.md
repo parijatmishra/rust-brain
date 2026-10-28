@@ -33,31 +33,22 @@ Rust and need to recall it before starting another project. It keeps
 explanations brief, and relies heavily on code examples to remind the user of
 syntax and Rust-specific rules without rereading a programming primer.
 
-This book assumes that the reader is familiar with basic programming language
-syntax, and has programmed in C, Java, and Python before. It assumes knowledge
-of the concepts: types, values, variables and constants, conditionals and loops,
-functions, parameters and arguments, return values, closures, concurrency, data
-races, locks and deadlocks, testing, benchmarking, profiling, character set and
-encoding, dependencies and verions, semver, package manger, build system, POSIX.
-It focuses on what distinguishes Rust.
-
 This book focuses on useful and common cases, rather than every language or tool
 detail. Links to references are provided where appropriate for easy access to
 more details. Here are some authoritative references. Individual topics will
 link to appropriate chapters in them when eliding details.
 
-- [The Rust Programming Language](https://doc.rust-lang.org/book/) ---
-  affectionately called "The Book", this is a free and high-quality learning
-  resource for the Rust language for newcomers; it discusses most the topics
-  below in greater details than this refresher.
-- [The Rust Standard Library Reference](https://doc.rust-lang.org/std/) ---
-  types, constants, traits, macros, and their API contracts.
-- [The Rust Language Reference](https://doc.rust-lang.org/reference/) ---
-  language syntax and semantics.
-- [Cargo Reference](https://doc.rust-lang.org/cargo/reference/) --- packages,
-  dependencies, features, workspaces, and build commands.
-- [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
-  --- edition-specific changes and migration guidance.
+- [The Rust Programming Language][trpl].
+- [The Rust Standard Library Reference][std-ref].
+- [The Rust Reference][rust-ref].
+- [Cargo Reference][cargo-ref].
+- [Rust 2024 Edition Guide][rust-2024].
+
+[trpl]: https://doc.rust-lang.org/book/
+[std-ref]: https://doc.rust-lang.org/std/
+[rust-ref]: https://doc.rust-lang.org/reference/
+[cargo-ref]: https://doc.rust-lang.org/cargo/reference/
+[rust-2024]: https://doc.rust-lang.org/edition-guide/rust-2024/
 
 The following topics are out of scope:
 
@@ -68,6 +59,16 @@ The following topics are out of scope:
   details, so the reader can recognize such syntax when reading code, and decide
   for themselves whether they want to learn the details.
 - Cross compilation.
+
+This book assumes that the reader is familiar with basic programming language
+syntax, and has programmed in C, Java, and Python or similar before. It focuses
+on what distinguishes Rust. It assumes prior knowledge of some concepts and does
+not explain them, such as: types, values, variables and constants, conditionals
+and loops, functions, parameters and arguments, return values, closures,
+concurrency, data races, locks and deadlocks, testing, benchmarking, profiling,
+character set and encoding, dependencies and versions, semver, dependency
+manager, build system, processes: spawn/fork/exec, threads, stack, heap, command
+line arguments, environment variables, I/O, IPC.
 <!-- ANCHOR_END: purpose-scope -->
 
 ## Build
@@ -102,6 +103,15 @@ and runs `book_build.sh` automatically.
   explicitly requested.
 
 ### Book '*.md' Rules
+
+The following rules are implicit (DO NOT CALL THEM OUT in the book's content,
+except in `./introduction.md`):
+
+- Topic text will be brief, and will depend heavily on code samples for
+  illustration, including inline code comments for more explanations.
+- Some code samples may use syntax and concepts introduced later.
+- A concept topic will not cover it exhaustively. Uncovered details will be
+  mentioned briefly and reference links will be provided for further reading.
 
 #### Code Samples
 

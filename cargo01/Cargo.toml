@@ -5,18 +5,13 @@ edition.workspace = true
 version.workspace = true
 license.workspace = true
 
-# ANCHOR: manifest-deps
 [dependencies]
-# Package name differs from crate path: 'cargo01_greet', 'unicode_segmentation'.
-cargo01-greet = { path = "../cargo01-greet" }
-unicode-segmentation = "1"
+unicode-segmentation = "1" # imported as `use unicode_segementation::...` <- `-` becomes `_`
+cargo01-greet = { path = "../cargo01-greet" } # imported as `use cargo_greet::...` <- `-` becomes `_`
 
 [dev-dependencies]
 pretty_assertions = "1"
-# ANCHOR_END: manifest-deps
 
-# ANCHOR: manifest-bench
 [[bench]]
 name = "my_add"
 harness = false
-# ANCHOR_END: manifest-bench
