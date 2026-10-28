@@ -33,15 +33,29 @@ Use minimally complete examples, even where they require forward references.
 Explain scaffolding only enough to build, run, inspect, and test the code;
 resolve its underlying concepts in later topics.
 
-- (TODO) [Cargo] --- crates; binary and library targets; Cargo packages;
-  Cargo workspaces; manifests; dependencies; build, run, and test commands.
+- (TODO) [Cargo] --- crates; Cargo packages: all target kinds (library, binary,
+  integration test, example binary, benchmark binary); common cargo package
+  level commands (build, test, run, bench); Cargo dependencies, and dependency
+  related commands; Cargo workspaces.
   - Emphasize: a package can contain multiple targets, each compiled as a
-    crate. A workspace groups packages; it is not another module hierarchy.
-    Distinguish a dependency's package name from its crate path.
-  - Defer: publishing, build scripts, cross-compilation, and detailed feature
-    resolution. Explain dependency features only as examples require them.
+    crate. A target's kind (library, binary, integration test, example, or
+    benchmark) determines how Cargo builds and invokes it: which command runs
+    it (`run`, `test`, `bench`, `run --example`), which crates it can access
+    (the library crate via `--lib`, only `dev-dependencies` for tests and
+    examples, etc.), and whether it is built by default. A workspace groups
+    packages; it is not another module hierarchy. Distinguish a dependency's
+    package name from its crate path.
+  - Mention briefly: build scripts and custom target kinds (their syntax and
+    purpose, just enough to recognize them in a manifest), with links to
+    [Cargo build scripts]
+    (https://doc.rust-lang.org/cargo/reference/build-scripts.html) and
+    [Cargo targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html)
+    for details.
+  - Defer: publishing, cross-compilation, and detailed feature resolution.
+    Explain dependency features only as examples require them.
   - Examples: create and run a binary package; add a library target and an
-    external dependency; place two packages in a workspace.
+    external dependency; add an integration test, an example binary, and a
+    benchmark binary; place two packages in a workspace.
 
 - (TODO) [Modules] --- module declarations; source-file layout; `pub`; paths;
   `crate`, `self`, and `super`; `use`, aliases, groups, and re-exports.
