@@ -33,30 +33,7 @@ Use minimally complete examples, even where they require forward references.
 Explain scaffolding only enough to build, run, inspect, and test the code;
 resolve its underlying concepts in later topics.
 
-- (WIP) [Cargo](./cargo.md) --- crates; Cargo packages: all target kinds
-  (library, binary,
-  integration test, example binary, benchmark binary); common cargo package
-  level commands (build, test, run, bench); Cargo dependencies, and dependency
-  related commands; Cargo workspaces.
-  - Emphasize: a package can contain multiple targets, each compiled as a
-    crate. A target's kind (library, binary, integration test, example, or
-    benchmark) determines how Cargo builds and invokes it: which command runs
-    it (`run`, `test`, `bench`, `run --example`), which crates it can access
-    (the library crate via `--lib`, only `dev-dependencies` for tests and
-    examples, etc.), and whether it is built by default. A workspace groups
-    packages; it is not another module hierarchy. Distinguish a dependency's
-    package name from its crate path.
-  - Mention briefly: [build scripts] and custom [target kinds] (their syntax and
-    purpose, just enough to recognize them in a manifest), with links to [Cargo
-    build scripts] and [Cargo targets] for details.
-  - Defer: publishing, cross-compilation, and detailed feature resolution.
-    Explain dependency features only as examples require them.
-  - Examples: create and run a binary package; add a library target and an
-    external dependency; add an integration test, an example binary, and a
-    benchmark binary; place two packages in a workspace.
-
-[build scripts]: https://doc.rust-lang.org/cargo/reference/build-scripts.html
-[target kinds]: https://doc.rust-lang.org/cargo/reference/cargo-targets.html
+- (DONE) [Cargo](./cargo.md)
 
 - (TODO) [Modules] --- module declarations; source-file layout; `pub`; paths;
   `crate`, `self`, and `super`; `use`, aliases, groups, and re-exports.
