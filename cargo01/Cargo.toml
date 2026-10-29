@@ -1,17 +1,4 @@
 [package]
 name = "cargo01"
-authors.workspace = true
-edition.workspace = true
-version.workspace = true
-license.workspace = true
-
-[dependencies]
-unicode-segmentation = "1" # imported as `use unicode_segementation::...` <- `-` becomes `_`
-cargo01-greet = { path = "../cargo01-greet" } # imported as `use cargo_greet::...` <- `-` becomes `_`
-
-[dev-dependencies]
-pretty_assertions = "1"
-
-[[bench]]
-name = "my_add"
-harness = false
+version = "0.1.0"
+edition = "2024"

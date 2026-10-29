@@ -1,4 +1,4 @@
-use cargo01::my_add;
+use cargo02::my_add;
 use std::time::Instant;
 
 fn main() {

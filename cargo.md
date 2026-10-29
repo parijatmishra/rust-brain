@@ -5,14 +5,14 @@ dependencies, runs tests, and orchestrates workspaces.
 
 ## Rust Crates
 
-A *crate* is a unit of compilation. A crate has a "root" file, from where the
-compiler starts compilation; the compiler compiles other files that are
+A *crate* is a unit of compilation. Every crate has a "root": a file from where
+the compiler starts compilation; the compiler also compiles other files that are
 *modules* of the crate. The final result is an *artifact*: a library or an
 executable. One crate root turns into one artifact.
 
 While we can compile crates manually using just `rustc`, it is very tedious for
-anything other than single-file programs with no dependencies. Real Rust
-projects using Cargo to manage dependencies and builds.
+anything more than single-file programs with no dependencies. Real Rust projects
+using Cargo to build crates.
 
 ## Cargo Packages
 
@@ -51,7 +51,10 @@ Declare dependencies in `[dependencies]` (available everywhere) and
 `[dev-dependencies]` (only tests, examples, and benchmarks). Depencencies state
 versions requirements via semver ranges (`"1"` accepts `1.x.y` but not `2.0`). A
 *path* dependency names another package by directory (typically a workspace
-member) instead of a name and version in some registry. E.g.:
+member) instead of a name and version in some registry.
+
+> **N.B.** If a dependency has hyphens in its name, when importing it in Rust
+> code using `use ...`, the hyphens are converted to underscores.
 
 ### Common Commands
 
@@ -76,90 +79,27 @@ The kind of a target decides which command invokes it: `run` runs binaries
 and examples, `test` runs unit and integration tests, `bench` runs
 benchmarks. Nothing runs a library; other targets consume it.
 
-## Example: minimal
-
-The directory `cargo01-greet` in the source repo contain a minimal Cargo package
-with only a library crate. Cargo auto-detects the library crate and target and
-builds it via `cargo build`.
-
-```text
-cargo01-greet
-├── Cargo.toml
-└── src
-    └── lib.rs
-```
-
-File: *cargo01-greet/Cargo.toml*:
-
-```toml
-{{#include ./cargo01-greet/Cargo.toml}}
-```
-
-File: **cargo01-greet/src/lib.rs**
-
-```rust
-{{#include ./cargo01-greet/src/lib.rs}}
-```
-
-## Example: all targets
-
-The directory `cargo01` in the source repo contains a Cargo package with all
-five target kinds.
-
-```text
-tree cargo01
-cargo01
-├── benches
-│   └── my_add.rs
-├── Cargo.toml
-├── examples
-│   ├── my_add.rs
-│   └── word_count.rs
-├── src
-│   ├── bin
-│   │   └── cargo01-hello.rs
-│   ├── lib.rs
-│   └── main.rs
-└── tests
-    └── my_add.rs
-```
-
-Its manifest shows how to use dependencies and how to customize a target.
-
-File: *cargo01/Cargo.toml*:
-
-```toml
-{{#include ./cargo01/Cargo.toml}}
-```
-
-Some possible commands:
-
-- `cargo build`
-- `cargo test`
-- `cargo test --lib`
-- `cargo test --test my_add`
-- `cargo run --bin cargo01`
-- `cargo run --bin cargo01-hello`
-- `cargo run --example my_add`
-- `cargo bench`
-- `cargo bench --bench my_add`
-
 ## Workspaces
 
 A *workspace* is a set of packages sharing one build directory, lockfile,
 and dependency-resolution pass. The root manifest lists members and can
-define shared metadata that members inherit with `NAME.workspace = true`
-(see `edition.workspace = true` in `cargo01/Cargo.toml`):
+define shared metadata that members inherit with `NAME.workspace = true`.
 
-File: *Cargo.toml*.
+File *Cargo.toml*.
 
 ```toml
 {{#include Cargo.toml}}
 ```
 
-A workspace groups packages for building and sharing settings; it is not a
-module hierarchy. Crates still import each other only through declared
-dependencies, as with the `cargo01-greet` path dependency above.
+File *cargo02/Cargo.toml* (excerpt):
+
+```toml
+{{#include ./cargo02/Cargo.toml:package}}
+```
+
+> **N.B.** A workspace groups packages for building and sharing settings; it is
+not a module hierarchy. Crates still import each other only through declared
+dependencies.
 
 ## Build Scripts
 
@@ -167,11 +107,144 @@ A *build script* is a `build.rs` file (or `build = "..."` manifest entry) that
 Cargo compiles and runs before the package, typically to generate code or find
 native libraries. See [build scripts][build-scripts].
 
-## Deferred Details
+## Further Reading
 
-Publishing, cross-compilation, and detailed feature resolution are out of
-scope. See [Cargo Reference][cargo-ref].
+For publishing, cross-compilation, and detailed feature resolution are out of
+scope, see [Cargo Reference][cargo-ref].
 
 [build-scripts]: https://doc.rust-lang.org/cargo/reference/build-scripts.html
 [cargo-targets]: https://doc.rust-lang.org/cargo/reference/cargo-targets.html
 [cargo-ref]: https://doc.rust-lang.org/cargo/reference/
+
+## Examples
+
+### `cargo01`
+
+A very simple Cargo package, with just a library crate.
+
+```text
+cargo01
+├── Cargo.toml
+└── src
+    └── lib.rs
+```
+
+File *./cargo01/Cargo.toml*:
+
+```toml
+{{#include ./cargo01/Cargo.toml}}
+```
+
+File *./cargo01/src/lib.rs*:
+
+```rust
+{{#include ./cargo01/src/lib.rs}}
+```
+
+The only useful command that can be run in this package is `cargo build`.
+
+### `cargo02`
+
+This package demonstrates:
+
+- How to inherit settings from parent workspace
+- How to declare dependencies to external crates, and path dependencies to other
+  packages in the filesystem.
+- How library, binary, integration test, exaple and benchmark crates are laid
+  out in the package.
+- How to override configuration for a crate.
+
+#### Crates
+
+```text
+cargo02
+├── benches
+│   └── my_add.rs
+├── Cargo.toml
+├── examples
+│   └── my_add.rs
+├── src
+│   ├── bin
+│   │   ├── count_words
+│   │   │   └── main.rs
+│   │   └── greet.rs
+│   ├── lib.rs
+│   └── main.rs
+└── tests
+    └── my_add.rs
+```
+
+Just following Cargo conventions, this package has the following crates:
+
+- A **library crate** named "cargo02", rooted at `src/lib.rs`.
+- A **binary crate** also named "cargo02", rooted at `src/main.rs`.
+- A **binary crate** named "greet", rooted at `src/bin/greet.rs`.
+- A **binary crate** named "count_words", rooted at
+  `src/bin/count_words/main.rs`.
+- An **integration test crate** named "my_add", rooted at `tests/my_add.rs`.
+- A **benchmark binary crate** named "my_add", rooted at `benches/my_add.rs`.
+- An **example binary crate** named "my_add", rooted at `examples/my_add.rs`.
+
+#### Commands
+
+- `cargo build`: compile `cargo02` library crate, and `cargo02`, `greet` and
+  `count_words` binary crates.
+- `cargo test`: compile and run unit, doc and integration tests.
+- `cargo test --test my_add`: compile and run the `my_add` integration test.
+- `cargo test --lib`: compile and run unit and doc tests in the library crate.
+- `cargo run --bin cargo02`: compile and run the `cargo02` (main) binary crate.
+- `cargo run --bin greet`: compile and run the `greet` binary crate.
+- `cargo run --bin count_words`: compile and run the `count_words` binary crate.
+- `cargo run --example my_add`: compile and run the `my_add` example crate.
+- `cargo bench`: compile and run all benchmark crates.
+- `cargo bench --bench my_add`: compile and run only the `my_add` benchmark
+  crate.
+
+#### Customizing Crates
+
+Dependending on the crate, various default setting values can be over-ridden in
+the package manifest.
+
+File *./cargo02/Cargo.toml* (excerpt):
+
+```toml
+{{#include ./cargo02/Cargo.toml:bench}}
+```
+
+#### Using The Library Crate
+
+File *./cargo02/src/lib.rs*:
+
+```rust,ignore
+{{#include ./cargo02/src/lib.rs}}
+```
+
+File *./cargo02/src/main.rs*:
+
+```rust,ignore
+{{#include ./cargo02/src/main.rs}}
+```
+
+#### Using Dependencies
+
+File *./cargo02/Cargo.toml* (excerpt):
+
+```toml
+{{#include ./cargo02/Cargo.toml:deps}}
+```
+
+File *./cargo02/src/bin/greet.rs*:
+
+```rust,ignore
+{{#include ./cargo02/src/bin/greet.rs}}
+```
+
+File *./cargo02/src/bin/count_words/main.rs*:
+
+> **N.B.** the dependency crate name is `unicode-segmentation` in `Cargo.toml`,
+> but in Rust code, it is referred to as `unicode_segmentation` (underscores
+> replacing hyphens).
+
+```rust,ignore
+{{#include ./cargo02/src/bin/count_words/main.rs}}
+```

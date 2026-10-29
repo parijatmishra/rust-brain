@@ -21,15 +21,16 @@ echo
 echo "########################################################################"
 echo "run binaries"
 echo "########################################################################"
-cargo run --package cargo01 --bin cargo01
-cargo run --package cargo01 --bin cargo01-hello
+cargo run --package cargo02 --bin cargo02
+cargo run --package cargo02 --bin greet
+cargo run --package cargo02 --bin count_words
 
 echo
 echo
 echo "########################################################################"
 echo "run examples"
 echo "########################################################################"
-cargo run --package cargo01 --example my_add
+cargo run --package cargo02 --example my_add
 
 echo
 echo

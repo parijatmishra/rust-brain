@@ -5,15 +5,15 @@ version = 4
 [[package]]
 name = "cargo01"
 version = "0.1.0"
+
+[[package]]
+name = "cargo02"
+version = "0.1.0"
 dependencies = [
- "cargo01-greet",
+ "cargo01",
  "pretty_assertions",
  "unicode-segmentation",
 ]
-
-[[package]]
-name = "cargo01-greet"
-version = "0.1.0"
 
 [[package]]
 name = "diff"

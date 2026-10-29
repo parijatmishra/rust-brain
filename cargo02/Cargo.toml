@@ -1,0 +1,23 @@
+# ANCHOR: package
+[package]
+name = "cargo02"
+authors.workspace = true
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+# ANCHOR_END: package
+
+# ANCHOR: deps
+[dependencies]
+unicode-segmentation = "1"
+cargo01 = { path = "../cargo01" }
+
+[dev-dependencies]
+pretty_assertions = "1"
+# ANCHOR_END: deps
+
+# ANCHOR: bench
+[[bench]]
+name = "my_add"
+harness = false
+# ANCHOR_END: bench
