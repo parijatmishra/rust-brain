@@ -56,6 +56,19 @@ member) instead of a name and version in some registry.
 > **N.B.** If a dependency has hyphens in its name, when importing it in Rust
 > code using `use ...`, the hyphens are converted to underscores.
 
+E.g., in `Cargo.toml`:
+
+```toml
+[dependencies]
+unicode-segmentation = "1"
+```
+
+In code:
+
+```rust,ignore
+use unicode_segmentation::UnicodeSegmentation;
+```
+
 ### Common Commands
 
 Run from inside a package directory, or anywhere in the workspace with
@@ -241,10 +254,10 @@ File *./cargo02/src/bin/greet.rs*:
 
 File *./cargo02/src/bin/count_words/main.rs*:
 
-> **N.B.** the dependency crate name is `unicode-segmentation` in `Cargo.toml`,
-> but in Rust code, it is referred to as `unicode_segmentation` (underscores
-> replacing hyphens).
-
 ```rust,ignore
 {{#include ./cargo02/src/bin/count_words/main.rs}}
 ```
+
+> **N.B.** the dependency crate name is `unicode-segmentation` in `Cargo.toml`,
+> but in Rust code, it is referred to as `unicode_segmentation` (underscores
+> replacing hyphens).
