@@ -122,8 +122,8 @@ directory. Exceptions:
 - A few short lines of code that are variations of a theme captured in a Cargo
   package's code and CANNOT easily be illustrated in that package itself.
 
-- Code that would not compile, to show common "gotchas" with syntax or usage.
-  Such code snippets should be illustrated in the topci's '*.md' file as:
+- Code that would not compile or run, to show common "gotchas" with syntax or
+  usage.  Such code snippets should be illustrated in the book's '*.md' file as:
 
     ````text
       ```rust,compile_fail
@@ -139,16 +139,18 @@ directory. Exceptions:
       ```
     ````
 
-For a topic, create one (or more, if absolutely required) member Cargo packages
-and put illustrative code there. Identify parts of code that should be included
-as illustrations in the topic's '*.md' file, and surround them with an mdbook
-"anchor" comment with a file-unique "tag". In the '*.md' file, use code similar
-to the following to include code snippets.
+For a topic, create one or more member Cargo packages and put illustrative code
+there. Identify parts of code that should be included as illustrations in the
+topic's '*.md' file, and surround them with an mdbook "anchor" comment with a
+file-unique "tag". In the '*.md' file, put each Rust include inside a Rust code
+block:
 
   ````text
-  File: _relative/path/to/file.rs_.
+  File: *package/path/to/file.rs* (excerpt).
 
-  {{#include relative/path/to/file.rs:tag}}
+  ```rust
+  {{#include package/path/to/file.rs:tag}}
+  ```
   ````
 
 Do not use line-numbers to include parts of files. Either use anchor tags, or
@@ -156,10 +158,67 @@ include the whole file. Include complete files (i.e., `\{\{#include
 relative/path/to/file.rs}})` only if the point is to show the structure of the
 entire file. In such cases, the file should be <20 lines long.
 
-Do not share cargo packages between topics.
+DO NOT share cargo packages between topics. Keep topic -> cargo packages
+self-contanined. **Rationale:** Often, a cargo package developed for a previous
+topic serves as a good example for a later topic with just a few modifications,
+and if feels wasteful duplication to create a new package that has largely the
+same code as another. It is tempting to reuse previous code.  This is a false
+economy. This book is about pedagogy: it is expected that similar code will be
+rewritten many times with variations to illustrate the (syntactically slight but
+semantically meaningful) differences. Sharing code between topics makes it
+difficult for them to evolve: an improvement or elision in code for one topic
+could make the code snippet in another topic irrelevant.
 
-After creatign/modifying Rust code in the filesystem, run `./code_build.sh`.
+After creating/modifying Rust code in the filesystem, run `./code_build.sh`.
 Resolve any errors or warnings.
+
+##### Testing Included Rust Code
+
+The book tests each Rust code block independently. Imports outside the included
+excerpt and dependencies declared in `Cargo.toml` are not carried over
+automatically.
+
+Add the following setup **in the Markdown, not the `.rs` file**. Lines beginning
+with `# ` participate in testing but remain hidden in the rendered book.
+
+**1. The included code uses another workspace crate**
+
+For example, it calls `modules01::summary()` or imports `use modules01::...`.
+Add `# extern crate modules01;` before the include:
+
+  ````text
+  ```rust
+  # extern crate modules01;
+  {{#include ./modules01/src/main.rs:module_import}}
+  ```
+  ````
+
+- Use the crate's name, not necessarily the package's name.
+- Do not add it for local modules, `crate::`, `self::`, `super::`, or
+  standard-library imports.
+- Do not duplicate an `extern crate` already present in the snippet.
+- This works with workspace libraries built by `book_build.sh`; third-party
+  libraries need additional setup.
+
+**2. The included code defines modules/items and uses `crate::` to refer to them**
+
+If it has no `main`, add `# fn main() {}` after the include:
+
+  ````text
+  ```rust
+  {{#include ./modules01/src/lib.rs}}
+  # fn main() {}
+  ```
+  ````
+
+This keeps those definitions at the crate root during testing.
+
+- Do not add it if the snippet already defines `main`.
+- Do not add an empty `main` if the snippet contains executable statements
+  outside functions, such as `let` or `assert_eq!`.
+- Otherwise, omit it unless the snippet needs crate-root placement.
+
+Run `./book_build.sh` to verify the snippets.
 
 #### Topic Files
 
