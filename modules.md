@@ -144,26 +144,71 @@ statement:
 
 ## Modules and Files
 
-When the Rust compiler sees a `mod XXX` declaration, it looks for the module
-code in:
+`mod xxx { ... }` defines a module inline, as in `modules01` above.  `mod xxx;`
+loads the module from a file. By convention, the file is either `xxx.rs` OR
+`xxx/mod.rs` in the parent module's directory (both files cannot exist for the
+same declaration).
 
-1. Between `{... }` immediately following the declaration, as in `modules01`
-   above.
-2. In a file `XXX.rs` relative to the file containing the parent module (or
-   crate root).
-3. In a file `XXX/mod.rs` relative to the file containing the parent module (or
-   crate root).
+> **N.B.** A module file is not loaded just because it exists: it needs a `mod`
+declaration.
+
+> **N.B.** The above locations can be changed by the [`#[path]`
+> attribute][ref-module-path] to a `mod` declaration.
+
+The crate root's module directory is the directory containing its source file.
+For each nested module, append its name as a directory, whether the module is
+inline or loaded from a file. For example:
+
+| Declaration                                                   | Default file locations                         |
+| ------------------------------------------------------------- | ---------------------------------------------- |
+| `mod alpha;` in `src/lib.rs`                                  | `src/alpha.rs` or `src/alpha/mod.rs`           |
+| `mod beta;` in `src/alpha.rs`                                 | `src/alpha/beta.rs` or `src/alpha/beta/mod.rs` |
+| `mod beta;` in `src/alpha/mod.rs`                             | `src/alpha/beta.rs` or `src/alpha/beta/mod.rs` |
+| `mod beta;` inside inline `mod alpha { ... }` in `src/lib.rs` | `src/alpha/beta.rs` or `src/alpha/beta/mod.rs` |
+
+In the last case, an inline module declares a child in a file. The inline
+module's name still contributes a directory to the child's file path.
+
+The `modules02` package reorganizes `modules01` across files:
+
+```text
+modules02/
+├── Cargo.toml
+└── src/
+    ├── lib.rs
+    ├── main.rs
+    ├── labels.rs
+    ├── arithmetic.rs
+    ├── arithmetic/
+    │   └── addition.rs
+    └── report/
+        └── mod.rs
+```
+
+Files `lib.rs` and `main.rs` are default Cargo crate root locations. The other
+Rust files define modules loaded by the following declarations. Paths are
+relative to `modules02/src/`.
+
+| File                     | Declaration           | In File         |
+| ------------------------ | --------------------- | --------------- |
+| `labels.rs`              | `mod labels;`         | `lib.rs`        |
+| `arithmetic.rs`          | `pub mod arithmetic;` | `lib.rs`        |
+| `arithmetic/addition.rs` | `pub mod addition;`   | `arithmetic.rs` |
+| `report/mod.rs`          | `pub mod report;`     | `lib.rs`        |
 
 ## References
 
 - [Modules][ref-modules]
 - [Paths][ref-paths]
+- [Module Paths][ref-module-path]
 - [Visibility and Privacy][ref-vis]
 - [Use Declarations][ref-use]
 - [Namespaces][ref-namespaces] and [Name Resolution][ref-resolution], including
   macro-specific rules.
 
 [ref-modules]: https://doc.rust-lang.org/reference/items/modules.html
+[ref-module-path]:
+  <https://doc.rust-lang.org/reference/items/modules.html#the-path-attribute>
 [ref-paths]: https://doc.rust-lang.org/reference/paths.html
 [ref-vis]: https://doc.rust-lang.org/reference/visibility-and-privacy.html
 [ref-use]: https://doc.rust-lang.org/reference/items/use-declarations.html

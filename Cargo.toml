@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["cargo01", "cargo02", "modules01"]
+members = ["cargo01", "cargo02", "modules01", "modules02"]
 
 [workspace.package]
 authors = ["Parijat Mishra"]
