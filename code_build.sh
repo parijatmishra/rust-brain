@@ -24,6 +24,7 @@ echo "########################################################################"
 cargo run --package cargo02 --bin cargo02
 cargo run --package cargo02 --bin greet
 cargo run --package cargo02 --bin count_words
+cargo run --package modules01 --bin modules01
 
 echo
 echo

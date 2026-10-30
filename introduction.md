@@ -35,15 +35,7 @@ resolve its underlying concepts in later topics.
 
 - (DONE) [Cargo](./cargo.md)
 
-- (TODO) [Modules] --- module declarations; source-file layout; `pub`; paths;
-  `crate`, `self`, and `super`; `use`, aliases, groups, and re-exports.
-  - Emphasize: `mod` declares a module, while `use` brings a path into scope.
-    Visibility belongs to items and their containing modules; filenames alone
-    do not determine the module tree.
-  - Defer: macro namespaces and detailed name resolution. Introduce restricted
-    visibility such as `pub(crate)` without cataloguing every path rule.
-  - Examples: split a library into inline and file-based modules; import an
-    item under an alias; expose an internal item through a public re-export.
+- (DONE) [Modules](./modules.md)
 
 - (TODO) [Documentation] --- line and block comments; outer rustdoc comments
   with `///` and `/** ... */`; inner comments with `//!` and `/*! ... */`.
