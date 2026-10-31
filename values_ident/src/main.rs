@@ -21,4 +21,22 @@ fn main() {
     later = 42; // First assignment initializes the immutable binding.
     assert_eq!(later, 42);
     // ANCHOR_END: local_initialization
+
+    // ANCHOR: type_annotations
+    let inferred_integer = 7_i32; // Inferred as i32 from the literal.
+    let annotated_integer: i32 = 7;
+    assert_eq!(inferred_integer, annotated_integer);
+
+    let inferred_boolean = true; // Inferred as bool from the initializer.
+    let annotated_boolean: bool = true;
+    assert_eq!(inferred_boolean, annotated_boolean);
+    // ANCHOR_END: type_annotations
+
+    // ANCHOR: later_type_constraint
+    let mut number = 7; // Inferred as u8 from the later assignment.
+    assert_eq!(number, 7);
+    let limit: u8 = 8;
+    number = limit; // `mut` permits reassignment; the type remains u8.
+    assert_eq!(number, 8);
+    // ANCHOR_END: later_type_constraint
 }

@@ -69,13 +69,25 @@ Inference is not dynamic typing, and `mut` does not allow a binding's type to
 change. Primitive types and their literal syntax follow in the next topic;
 generic inference comes with generics.
 
-TODO: Code samples:
+File: *values_ident/src/main.rs* (excerpt).
 
-- Compare inferred and explicitly annotated integer and boolean bindings.
-- Let a later assignment from an explicitly typed integer constrain the type
-  of an earlier binding.
-- Reject a boolean initializer for an integer annotation in a `compile_fail`
-  snippet, without introducing casts or conversion traits.
+```rust
+{{#include values_ident/src/main.rs:type_annotations}}
+```
+
+A later assignment can constrain the type inferred for an earlier binding:
+
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:later_type_constraint}}
+```
+
+An annotation does not convert an incompatible initializer:
+
+```rust,compile_fail
+let number: i32 = true; // Error: expected i32, found bool.
+```
 
 ## Mutable Bindings
 
