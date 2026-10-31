@@ -284,28 +284,24 @@ static PROCESS_ID: u32 = std::process::id(); // Error: not a constant expression
 
 ## Recognizing Mutable Statics
 
-`static mut NAME: Type = value;` declares a mutable static. Recognize the
-syntax, but do not use it as an ordinary global variable. Reading or writing
-its stored value requires unsafe code and obligations concerning aliasing and
-concurrent access; `unsafe` does not supply synchronization or make invalid
-access sound. Even single-threaded access can violate aliasing rules.
+You may encounter `static mut` in Rust code. It declares a mutable static;
+accessing it involves unsafe Rust, which is outside this book's scope.
 
-Rust 2024 [denies references to mutable statics][static-mut-refs] by default,
-including implicit references. Safe shared-state APIs belong with interior
-mutability, synchronization, and atomics; unsafe access techniques remain
-outside this book's scope.
+static mut is rarely needed in application code. It can arise when:
 
-TODO: Code samples:
+- Interfacing with C or platform APIs that expose a mutable global.
+- Implementing low-level runtime, kernel, or embedded code with
+  platform-specific access rules.
+- Maintaining existing code that uses mutable globals.
 
-- Show only a primitive `static mut` declaration, annotated with its hazards;
-  do not read it, write it, or create references to it.
+Even in low-level code, a safe abstraction can often confine the unsafe access.
+For embedded systems, it is preferable to use the platform's critical-section
+APIs or embedded synchronization libraries.
 
-[identifiers]: https://doc.rust-lang.org/reference/identifiers.html
+[identifiers]: <https://doc.rust-lang.org/reference/identifiers.html>
 [let-statements]:
   <https://doc.rust-lang.org/reference/statements.html#let-statements>
 [scopes]:
   <https://doc.rust-lang.org/reference/names/scopes.html#pattern-binding-scopes>
-[constants]: https://doc.rust-lang.org/reference/items/constant-items.html
-[statics]: https://doc.rust-lang.org/reference/items/static-items.html
-[static-mut-refs]:
-  <https://doc.rust-lang.org/edition-guide/rust-2024/static-mut-references.html>
+[constants]: <https://doc.rust-lang.org/reference/items/constant-items.html>
+[statics]: <https://doc.rust-lang.org/reference/items/static-items.html>
