@@ -70,4 +70,30 @@ fn main() {
     }
     assert_eq!(threshold, 10); // The outer binding is visible again.
     // ANCHOR_END: nested_scope
+
+    // ANCHOR: constant_value
+    const DEFAULT_LIMIT: u32 = 2 * 5; // Constant expression, evaluated at compile time.
+    let first_limit = DEFAULT_LIMIT;
+    let second_limit = DEFAULT_LIMIT + 1;
+    assert_eq!(first_limit, 10);
+    assert_eq!(second_limit, 11);
+    // ANCHOR_END: constant_value
+
+    // ANCHOR: constant_and_runtime
+    fn add_step(input: u32) -> u32 {
+        const STEP: u32 = 2 * 5; // Constant expression.
+        let total = input + STEP; // Immutable local using a runtime parameter.
+        total
+    }
+    assert_eq!(add_step(3), 13);
+    // ANCHOR_END: constant_and_runtime
+
+    // ANCHOR: constant_shadowing
+    const LIMIT: u32 = 10;
+    {
+        const LIMIT: u32 = 20; // Shadows the outer constant in this block.
+        assert_eq!(LIMIT, 20);
+    }
+    assert_eq!(LIMIT, 10); // The outer constant is visible again.
+    // ANCHOR_END: constant_shadowing
 }

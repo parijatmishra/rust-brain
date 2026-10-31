@@ -179,23 +179,65 @@ let _ = inside; // Error: `inside` is out of scope.
 
 `const NAME: Type = value;` declares a [constant item][constants], not a local
 variable. Its type and initializer are required, and the initializer must be a
-constant expression evaluated at compile time. Constants can appear at module
-scope or within a block. They cannot be reassigned or declared `mut`.
+constant expression evaluated at compile time. An immutable `let`, by
+contrast, may be initialized from a runtime computation.
 
-A constant denotes a value, not a unique storage location. Uses need not share
-an address; do not treat a constant as a shared variable. An immutable `let`, by
-contrast, may be initialized from a runtime computation. `const fn` and the
-restrictions on constant evaluation receive further treatment with functions;
-associated constants come with traits.
+Constants can appear at module scope or within a block. They cannot be
+reassigned or declared `mut`. A constant denotes a value, not a unique storage
+location. Uses need not share an address; do not treat a constant as a shared
+variable.  `const fn` and the restrictions on constant evaluation receive
+further treatment with functions; associated constants come with traits.
 
-TODO: Code samples:
+File: *values_ident/src/main.rs* (excerpt).
 
-- Declare a typed integer constant and use it to initialize local bindings.
-- Contrast a constant initializer with an immutable local initialized from a
-  runtime value, using only primitive values.
-- Reject a missing constant type and a constant initialized from a runtime
-  local in separate `compile_fail` snippets.
-- Reject reassignment of a constant in a `compile_fail` snippet.
+```rust
+{{#include values_ident/src/main.rs:constant_value}}
+```
+
+An immutable local can use a runtime parameter; a constant initializer cannot:
+
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:constant_and_runtime}}
+```
+
+A constant declaration requires a type:
+
+```rust,compile_fail
+const LIMIT = 10; // Error: missing type.
+```
+
+A constant cannot use a runtime local as its initializer:
+
+```rust,compile_fail
+let runtime = std::process::id();
+const ID: u32 = runtime; // Error: a constant cannot use a local binding.
+```
+
+A constant cannot be reassigned:
+
+```rust,compile_fail
+const LIMIT: u32 = 10;
+LIMIT = 20; // Error: a constant is not a mutable binding.
+```
+
+A constant in a nested scope can shadow an outer constant:
+
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:constant_shadowing}}
+```
+
+A `let` binding cannot shadow a visible constant. A bare name matching a
+constant in a `let` pattern refers to that constant, rather than creating a
+binding. The integer pattern below is refutable, so `let` rejects it:
+
+```rust,compile_fail
+const LIMIT: u32 = 10;
+let LIMIT = 20; // Error: refutable pattern, not a new binding.
+```
 
 ## Immutable Statics
 
