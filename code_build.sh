@@ -27,6 +27,7 @@ cargo run --package cargo02 --bin count_words
 cargo run --package debugging --bin debugging
 cargo run --package modules01 --bin modules01
 cargo run --package modules02 --bin modules02
+cargo run --package values_ident --bin values_ident
 
 echo
 echo

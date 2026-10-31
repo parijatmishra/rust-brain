@@ -12,13 +12,25 @@ name. A leading underscore suppresses unused-binding warnings. `_` alone does
 not create a binding; `_name` does. Destructuring and other pattern uses come
 with patterns.
 
-TODO: Code samples:
+File: *values_ident/src/main.rs* (excerpt).
 
-- Declare bindings with ordinary names and an intentionally unused `_name`.
-- Use `r#type` as a local name; contrast it with a rejected bare keyword in a
-  `compile_fail` snippet.
-- Contrast an unused named binding with `let _ = 42;`, without introducing
-  ownership or destruction behavior.
+```rust
+{{#include values_ident/src/main.rs:identifiers}}
+```
+
+A raw identifier can use a keyword as a name:
+
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:raw_identifier}}
+```
+
+Without `r#`, the keyword is rejected:
+
+```rust,compile_fail
+let type = 42;
+```
 
 ## Local Bindings and Initialization
 
@@ -32,11 +44,18 @@ The [binding syntax][let-statements] also accepts patterns. Start with one
 identifier; destructuring and conditional bindings receive their own treatment
 later.
 
-TODO: Code samples:
+File: *values_ident/src/main.rs* (excerpt).
 
-- Initialize an immutable integer binding and use it.
-- Declare an immutable binding with a type, then initialize and use it.
-- Show use before initialization in a `compile_fail` snippet.
+```rust
+{{#include values_ident/src/main.rs:local_initialization}}
+```
+
+Using a binding before initialization is rejected:
+
+```rust,compile_fail
+let value: i32;
+let copy = value; // Error: `value` is not initialized.
+```
 
 ## Type Annotations and Inference
 
