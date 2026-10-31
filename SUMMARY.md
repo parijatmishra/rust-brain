@@ -10,3 +10,7 @@
 - [Debugging](./debugging.md)
 - [Testing](./testing.md)
 - [Prelude](./prelude.md)
+
+# Basics
+
+- [Values and Identifiers](./values_idents.md)
