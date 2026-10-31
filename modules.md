@@ -103,8 +103,9 @@ and the `self`, `super` and `crate` keywords.
 
 File: *./modules01/src/lib.rs*:
 
-```rust,ignore
+```rust
 {{#include ./modules01/src/lib.rs}}
+# fn main() {}
 ```
 
 ## Importing: `use`, `use ... as`
@@ -112,33 +113,38 @@ File: *./modules01/src/lib.rs*:
 A client of the crate can refer to its items using the fully qualified path,
 starting from the crate name.
 
-```rust,ignore
+```rust
+# extern crate modules01;
 {{#include ./modules01/src/main.rs:qualified}}
 ```
 
 The `use` keyword brings nested modules into scope and allows them to be
 referred without qualification.
 
-```rust,ignore
+```rust
+# extern crate modules01;
 {{#include ./modules01/src/main.rs:module_import}}
 ```
 
 The `use` keyword can bring items, not just modules, into scope.
 
-```rust,ignore
+```rust
+# extern crate modules01;
 {{#include ./modules01/src/main.rs:item_import}}
 ```
 
 The `use ... as` statement can rename an item or module.
 
-```rust,ignore
+```rust
+# extern crate modules01;
 {{#include ./modules01/src/main.rs:use_as}}
 ```
 
 For brevity, multiple `use` statements can be collapsed into a "grouped use"
 statement:
 
-```rust,ignore
+```rust
+# extern crate modules01;
 {{#include ./modules01/src/main.rs:grouped_import}}
 ```
 

@@ -228,13 +228,14 @@ File *./cargo02/Cargo.toml* (excerpt):
 
 File *./cargo02/src/lib.rs*:
 
-```rust,ignore
+```rust
 {{#include ./cargo02/src/lib.rs}}
 ```
 
 File *./cargo02/src/main.rs*:
 
-```rust,ignore
+```rust
+# extern crate cargo02;
 {{#include ./cargo02/src/main.rs}}
 ```
 
@@ -248,7 +249,8 @@ File *./cargo02/Cargo.toml* (excerpt):
 
 File *./cargo02/src/bin/greet.rs*:
 
-```rust,ignore
+```rust
+# extern crate cargo01;
 {{#include ./cargo02/src/bin/greet.rs}}
 ```
 
