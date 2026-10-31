@@ -79,9 +79,8 @@ Pre-requisites:
 - Check if all tools are present and working by running
   [`tools_check.sh`](./tools_check.sh).
 
-Run [`code_build.sh`] to build and test only the code, and [`book_build.sh`] to
-test and build both the code and the book. Generated book will be at
-[`html/index.html`](html/index.html).
+Run [`book_build.sh`] to test and build both the code and the book.
+Generated book will be at [`html/index.html`](html/index.html).
 
 ## Develop
 
