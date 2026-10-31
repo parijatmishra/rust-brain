@@ -253,14 +253,34 @@ mutability and synchronization cover controlled shared mutation later. Runtime
 lazy initialization comes in its own topic, not from an ordinary static
 initializer.
 
-TODO: Code samples:
+A constant denotes a value; a static denotes one storage location:
 
-- Declare a primitive constant and an immutable primitive static side by side;
-  read both and explain value versus shared storage in comments.
-- Read a function-local static on repeated calls, noting that it is the same
-  static each time; leave reference and address comparisons for later.
-- Reject reassignment of an immutable static and a runtime-dependent static
-  initializer in separate `compile_fail` snippets.
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:constant_and_static}}
+```
+
+A function-local static is the same static on each call:
+
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:function_local_static}}
+```
+
+An immutable static cannot be reassigned:
+
+```rust,compile_fail
+static SHARED_RETRIES: u32 = 3;
+SHARED_RETRIES = 4; // Error: the static is immutable.
+```
+
+A static initializer cannot depend on a runtime computation:
+
+```rust,compile_fail
+static PROCESS_ID: u32 = std::process::id(); // Error: not a constant expression.
+```
 
 ## Recognizing Mutable Statics
 

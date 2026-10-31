@@ -96,4 +96,22 @@ fn main() {
     }
     assert_eq!(LIMIT, 10); // The outer constant is visible again.
     // ANCHOR_END: constant_shadowing
+
+    // ANCHOR: constant_and_static
+    const DEFAULT_RETRIES: u32 = 3; // A value, not a unique storage location.
+    static SHARED_RETRIES: u32 = 3; // One storage location shared by all accesses.
+    let default_retries = DEFAULT_RETRIES;
+    let shared_retries = SHARED_RETRIES;
+    assert_eq!(default_retries, 3);
+    assert_eq!(shared_retries, 3);
+    // ANCHOR_END: constant_and_static
+
+    // ANCHOR: function_local_static
+    fn max_connections() -> u32 {
+        static MAX_CONNECTIONS: u32 = 8; // The same static on every call.
+        MAX_CONNECTIONS
+    }
+    assert_eq!(max_connections(), 8);
+    assert_eq!(max_connections(), 8);
+    // ANCHOR_END: function_local_static
 }
