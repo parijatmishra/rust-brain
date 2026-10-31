@@ -51,17 +51,7 @@ Focus on syntax and value-level behavior. Use owned primitives and small
 examples; identify references, generics, and macros without developing them
 before their dedicated sections.
 
-- (WIP) [Values and Identifiers](./values_idents.md) --- `let`; `let mut`;
-  `const`; `static`; type annotations; type inference; shadowing; recognition
-  of `static mut`.
-  - Emphasize: binding mutability and shadowing are different. A constant is
-    not a mutable binding, and a static denotes a shared storage location.
-    Type inference does not remove static type checking.
-  - Defer: ownership, references, interior mutability, synchronization, and
-    unsafe access to mutable statics. Show `static mut` only to recognize its
-    syntax and hazards.
-  - Examples: infer and annotate a value's type; mutate a binding; shadow it
-    with a different type; contrast a constant with an immutable static.
+- (WIP) [Values and Identifiers](./values_idents.md)
 
 - (TODO) [Primitive Types] --- booleans; integers; floats; `char`; `str`;
   tuples; arrays; unit; references; raw pointer and never (`!`) syntax.
