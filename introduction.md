@@ -39,15 +39,7 @@ resolve its underlying concepts in later topics.
 
 - (DONE) [Comments](./comments.md)
 
-- (TODO) [Debugging] --- `assert!` and `assert_eq!`; `println!` and `eprintln!`;
-  `#[derive(Debug)]`; `{:?}` and `{:#?}`.
-  - Emphasize: assertions check assumptions and panic on failure. Debug output
-    is for inspection, not a stable serialization format; distinguish standard
-    output from diagnostic output on standard error.
-  - Defer: trait implementations, formatting internals, and panic behavior.
-    Treat derives and macros as scaffolding until their own topics.
-  - Examples: inspect a derived struct with compact and pretty debug output;
-    print a diagnostic; show a failed assertion and its message.
+- (DONE) [Debugging](./debugging.md)
 
 - (TODO) [Testing] --- unit tests; integration tests; doctests; `#[test]`;
   `#[cfg(test)]`; assertions; test filtering with Cargo.
