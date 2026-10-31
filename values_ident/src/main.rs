@@ -46,4 +46,28 @@ fn main() {
     score = 20; // Reassignment changes the value, not the binding's type.
     assert_eq!(score, 20);
     // ANCHOR_END: mutable_binding
+
+    // ANCHOR: shadowing
+    let value = 3;
+    let value = value + 2; // A new binding; the initializer sees the old value.
+    assert_eq!(value, 5);
+    let value = value > 4; // Another binding, now of type bool.
+    assert!(value);
+    // ANCHOR_END: shadowing
+
+    // ANCHOR: shadow_mutability
+    let mut level = 1;
+    level += 1;
+    let level = level; // The new binding is immutable.
+    assert_eq!(level, 2);
+    // ANCHOR_END: shadow_mutability
+
+    // ANCHOR: nested_scope
+    let threshold = 10;
+    {
+        let threshold = 20; // Shadows the outer binding inside this block.
+        assert_eq!(threshold, 20);
+    }
+    assert_eq!(threshold, 10); // The outer binding is visible again.
+    // ANCHOR_END: nested_scope
 }

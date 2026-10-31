@@ -132,15 +132,48 @@ Shadowing works in the same block or in a nested block. After a nested block
 ends, the outer binding is visible again. Name visibility alone does not
 explain when values are destroyed; ownership and drop scopes come later.
 
-TODO: Code samples:
+Shadowing can change the type of a name:
 
-- Shadow an immutable integer with a computed integer, then with a boolean.
-- Shadow a mutable binding with an immutable one; reject a later reassignment
-  in a `compile_fail` snippet.
-- Shadow a name inside a nested block and check that the outer name is visible
-  unchanged afterward.
-- Reject use of a block-local name outside its block in a `compile_fail`
-  snippet.
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:shadowing}}
+```
+
+It can also change mutability:
+
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:shadow_mutability}}
+```
+
+The new immutable binding cannot be reassigned:
+
+```rust,compile_fail
+let mut level = 1;
+level += 1;
+let level = level;
+level = 3; // Error: the new binding is immutable.
+```
+
+A nested binding shadows the outer one only within its block:
+
+File: *values_ident/src/main.rs* (excerpt).
+
+```rust
+{{#include values_ident/src/main.rs:nested_scope}}
+```
+
+A block-local binding is not visible outside the block:
+
+```rust,compile_fail
+{
+    let inside = 42;
+    assert_eq!(inside, 42);
+}
+let _ = inside; // Error: `inside` is out of scope.
+```
 
 ## Constants
 
