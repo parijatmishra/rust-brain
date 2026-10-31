@@ -200,7 +200,8 @@ Add `# extern crate modules01;` before the include:
 - This works with workspace libraries built by `book_build.sh`; third-party
   libraries need additional setup.
 
-**2. The included code defines modules/items and uses `crate::` to refer to them**
+**2. The included code defines modules/items and uses `crate::` to refer to
+them**
 
 If it has no `main`, add `# fn main() {}` after the include:
 
