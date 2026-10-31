@@ -100,13 +100,25 @@ immutable local binding is not a `const`: its initializer can run at runtime.
 Ownership, mutation through references, and interior mutability refine these
 rules later.
 
-TODO: Code samples:
+File: *values_ident/src/main.rs* (excerpt).
 
-- Initialize a mutable integer, reassign it, and check the new value.
-- Reject reassignment of an initialized immutable binding in a `compile_fail`
-  snippet.
-- Reject assigning a boolean to a mutable integer binding in a `compile_fail`
-  snippet.
+```rust
+{{#include values_ident/src/main.rs:mutable_binding}}
+```
+
+An initialized immutable binding cannot be reassigned:
+
+```rust,compile_fail
+let score = 10;
+score = 20; // Error: `score` is immutable.
+```
+
+A mutable binding still has a fixed type:
+
+```rust,compile_fail
+let mut score: i32 = 10;
+score = true; // Error: expected i32, found bool.
+```
 
 ## Scope and Shadowing
 

@@ -39,4 +39,11 @@ fn main() {
     number = limit; // `mut` permits reassignment; the type remains u8.
     assert_eq!(number, 8);
     // ANCHOR_END: later_type_constraint
+
+    // ANCHOR: mutable_binding
+    let mut score = 10;
+    assert_eq!(score, 10);
+    score = 20; // Reassignment changes the value, not the binding's type.
+    assert_eq!(score, 20);
+    // ANCHOR_END: mutable_binding
 }
