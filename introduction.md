@@ -37,15 +37,7 @@ resolve its underlying concepts in later topics.
 
 - (DONE) [Modules](./modules.md)
 
-- (TODO) [Documentation] --- line and block comments; outer rustdoc comments
-  with `///` and `/** ... */`; inner comments with `//!` and `/*! ... */`.
-  - Emphasize: outer documentation describes the following item; inner
-    documentation describes its enclosing item. Ordinary comments do not
-    become API documentation.
-  - Defer: advanced rustdoc attributes and customization. Connect executable
-    documentation examples to doctests in the testing topic.
-  - Examples: document a crate, module, and function; add a fenced Rust example;
-    generate and open documentation with Cargo.
+- (DONE) [Comments](./comments.md)
 
 - (TODO) [Debugging] --- `assert!` and `assert_eq!`; `println!` and `eprintln!`;
   `#[derive(Debug)]`; `{:?}` and `{:#?}`.
