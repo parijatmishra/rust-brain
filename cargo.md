@@ -204,7 +204,8 @@ Just following Cargo conventions, this package has the following crates:
   `count_words` binary crates.
 - `cargo test`: compile and run unit, doc and integration tests.
 - `cargo test --test my_add`: compile and run the `my_add` integration test.
-- `cargo test --lib`: compile and run unit and doc tests in the library crate.
+- `cargo test --lib`: compile and run unit tests in the library crate.
+- `cargo test --doc`: compile and run the library's doc tests.
 - `cargo run --bin cargo02`: compile and run the `cargo02` (main) binary crate.
 - `cargo run --bin greet`: compile and run the `greet` binary crate.
 - `cargo run --bin count_words`: compile and run the `count_words` binary crate.

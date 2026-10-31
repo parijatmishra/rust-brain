@@ -41,15 +41,7 @@ resolve its underlying concepts in later topics.
 
 - (DONE) [Debugging](./debugging.md)
 
-- (TODO) [Testing] --- unit tests; integration tests; doctests; `#[test]`;
-  `#[cfg(test)]`; assertions; test filtering with Cargo.
-  - Emphasize: unit tests can exercise private implementation details, while
-    integration tests use a library's public API from separate crates.
-    Tests should not depend on execution order or shared mutable state.
-  - Defer: property testing, fuzzing, benchmarks, and elaborate test fixtures.
-    Revisit fallible tests after error handling.
-  - Examples: test a private helper and a public function; add a passing
-    doctest and a `compile_fail` example; run one test by name.
+- (DONE) [Testing](./testing.md)
 
 - (TODO) [Prelude] --- automatically available names; the standard prelude;
   the extern prelude; explicit imports for other APIs.
