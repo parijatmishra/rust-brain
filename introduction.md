@@ -43,15 +43,7 @@ resolve its underlying concepts in later topics.
 
 - (DONE) [Testing](./testing.md)
 
-- (TODO) [Prelude] --- automatically available names; the standard prelude;
-  the extern prelude; explicit imports for other APIs.
-  - Emphasize: common types such as `Option` and `Vec` need no explicit import,
-    but not every standard-library item is in scope. Available dependencies
-    and imported items are different things.
-  - Defer: `no_std`, custom preludes, and edition-by-edition differences.
-    Explain imported traits when method resolution is introduced.
-  - Examples: use a prelude type directly; import `HashMap`; call an item
-    through its full path; contrast an external crate path with a `use`.
+- (DONE) [Prelude](./prelude.md)
 
 ## Basics
 
