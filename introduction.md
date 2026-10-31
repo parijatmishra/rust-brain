@@ -51,10 +51,11 @@ Focus on syntax and value-level behavior. Use owned primitives and small
 examples; identify references, generics, and macros without developing them
 before their dedicated sections.
 
-- (WIP) [Values and Identifiers](./values_idents.md)
+- (DONE) [Values and Identifiers](./values_idents.md)
 
 - (TODO) [Primitive Types] --- booleans; integers; floats; `char`; `str`;
-  tuples; arrays; unit; references; raw pointer and never (`!`) syntax.
+  tuples; arrays; unit; references; raw pointer and never (`!`) syntax (stable
+  Rust only). For each type, show exhaustive examples of literals.
   - Emphasize: arrays have a fixed length in their type; tuples can mix types;
     unit is a value, not an absent return type. A `char` is a Unicode scalar
     value, not a byte or necessarily a displayed character.
